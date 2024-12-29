@@ -49,7 +49,7 @@ export const signup = async (req, res) => {
         }
     } catch (error) {
         console.log(`Error creating user : ${error}`);
-        res.status(500).json({ message: "User creation unsuccessful." });
+        res.status(500).json({ message: "Internal server error. " });
     }
 }
 
@@ -59,11 +59,11 @@ export const login = async (req, res) => {
     try {
         // Find the user
         const user = await User.findOne({ email });
-        
+
         // If user doesn't exist, return
         if (!user) {
             return res.status(400).json({ message: "Invalid credentials !" });
-        } 
+        }
 
         // Checking password
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
@@ -75,13 +75,21 @@ export const login = async (req, res) => {
 
         // If correct, generate token and send success status
         generateToken(user._id, res);
-        res.status(201).json({ message : `Welcome ${user.email} !`});
+        res.status(201).json({ message: `Welcome ${user.email} !` });
 
     } catch (error) {
         console.log(`Error finding the user : ${error}`);
+        res.status(500).json({ message: "Internal server error. " });
     }
 }
 
 export const logout = (req, res) => {
-    res.send("Logout route");
+    try {
+        // Removing cookie to destroy session 
+        res.cookie("us_er_tok_en", "", { maxAge: 0 });
+        res.status(201).json({ message: "You were logged out successfully!" });
+    } catch (error) {
+        console.log(`Error logging out : ${error}`);
+        res.status(500).json({ message: "Internal server error. " });
+    }
 }
