@@ -2,7 +2,6 @@ import { generateToken } from "../lib/utils.js";
 import User from "../models/users.model.js";
 import bcrypt from "bcryptjs";
 
-// Signup 
 export const signup = async (req, res) => {
     const { name, email, password, profilePic } = req.body;
 
@@ -33,7 +32,7 @@ export const signup = async (req, res) => {
         });
 
         if (newUser) {
-            // Generate JWT Token
+            // Generate JWT Token and save user to DB
             generateToken(newUser._id, res);
             await newUser.save();
 
@@ -54,12 +53,35 @@ export const signup = async (req, res) => {
     }
 }
 
-// Login
-export const login = (req, res) => {
-    res.send("Login route");
+export const login = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        // Find the user
+        const user = await User.findOne({ email });
+        
+        // If user doesn't exist, return
+        if (!user) {
+            return res.status(400).json({ message: "Invalid credentials !" });
+        } 
+
+        // Checking password
+        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+        // If password incorrect, return
+        if (!isPasswordCorrect) {
+            return res.status(400).json({ message: "Invalid credentials !" });
+        }
+
+        // If correct, generate token and send success status
+        generateToken(user._id, res);
+        res.status(201).json({ message : `Welcome ${user.email} !`});
+
+    } catch (error) {
+        console.log(`Error finding the user : ${error}`);
+    }
 }
 
-// Logout
 export const logout = (req, res) => {
     res.send("Logout route");
 }
