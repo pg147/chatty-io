@@ -2,7 +2,7 @@
 import express from 'express';
 
 // Controller Logics
-import { signup, login, logout } from '../controllers/auth.controller';
+import { signup, login, logout } from '../controllers/auth.controller.js';
 
 const router = express.Router(); // Initialized Router
 
