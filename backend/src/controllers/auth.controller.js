@@ -1,3 +1,4 @@
+import { generateToken } from "../lib/utils.js";
 import User from "../models/users.model.js";
 import bcrypt from "bcryptjs";
 
@@ -20,8 +21,32 @@ export const signup = async (req, res) => {
         const salt = await bcrypt.genSalt(10); // Creating a salt for password
         const hashedPassword = await bcrypt.hash(password, salt); // Hashing the password with generated salt
 
+        const newUser = new User({
+            name: name,
+            email: email,
+            password: hashedPassword,
+            profilePic: profilePic
+        });
+
+        if (newUser) {
+            // Generate JWT Token
+            generateToken(newUser._id, res);
+            await newUser.save();
+
+            // Send success status 
+            res.status(201).json({
+                _id: newUser._id,
+                name: newUser.name,
+                email: newUser.email,
+                profilePic: newUser.profilePic
+            });
+
+        } else {
+            res.status(400).json({ message : "Invalid user data" });
+        }
     } catch (error) {
-        
+        console.log(`Error creating user : ${error}`);
+        res.status(500).json({ message: "User creation unsuccessful." });
     }
 }
 
