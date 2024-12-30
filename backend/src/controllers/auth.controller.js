@@ -93,3 +93,28 @@ export const logout = (req, res) => {
         res.status(500).json({ message: "Internal server error. " });
     }
 }
+
+export const update = async (req, res) => {
+    const { email, name } = req.body;
+    const { id } = req.params;
+
+    try {
+        const user = await User.findById(id);
+        
+        if (!user) {
+            return res.status(400).json({message : "User doesn't exist. "});
+        }  
+
+        const newData = await user.updateOne({ email: email, name: name });
+
+        if (newData) {
+            res.status(201).json({
+                updatedName : newData.name,
+                updatedEmail : newData.email
+            });
+        } 
+    } catch (error) {
+        console.log(`Error updating user ${error}`);
+        res.status(500).json({ message: "Internal server error. " });
+    }
+}
