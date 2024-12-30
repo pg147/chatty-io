@@ -1,6 +1,7 @@
 import { generateToken } from "../lib/utils.js";
 import User from "../models/users.model.js";
 import bcrypt from "bcryptjs";
+import cloudinary from "../lib/cloudinary.js";
 
 export const signup = async (req, res) => {
     const { name, email, password, profilePic } = req.body;
@@ -95,26 +96,22 @@ export const logout = (req, res) => {
 }
 
 export const update = async (req, res) => {
-    const { email, name } = req.body;
-    const { id } = req.params;
+    const { profilePic } = req.body;
+    const userId = req.user._id; // possible due to the middleware (protectedRoute)
 
     try {
-        const user = await User.findById(id);
+        if (!profilePic) {
+            return res.status(400).json({ message: "Profile pic is required!" });
+        }
+
+        // Uploading profile pic to Cloudinary
+        const updatedResponse = await cloudinary.uploader.upload(profilePic);
+        // Updating users profile pic in DB
+        const updateProfile = await User.findByIdAndUpdate(userId, { profilePic: updatedResponse.secure_url }, { new: true });
         
-        if (!user) {
-            return res.status(400).json({message : "User doesn't exist. "});
-        }  
-
-        const newData = await user.updateOne({ email: email, name: name });
-
-        if (newData) {
-            res.status(201).json({
-                updatedName : newData.name,
-                updatedEmail : newData.email
-            });
-        } 
+        res.status(201).json(updateProfile);
     } catch (error) {
-        console.log(`Error updating user ${error}`);
-        res.status(500).json({ message: "Internal server error. " });
-    }
+        console.log("Error updating profile : ", error);
+        res.status(500).json({ message: "Internal server error."});
+    }   
 }
