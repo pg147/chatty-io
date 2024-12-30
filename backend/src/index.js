@@ -1,8 +1,14 @@
-import express from 'express'; // express module
+// Dependencies
+import express from 'express'; 
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-import authRoutes from './routes/auth.route.js';
+
+// DB Connection function
 import { connectDB } from './lib/db.js';
+
+// Routers
+import authRoutes from './routes/auth.route.js';
+import messageRoutes from './routes/message.route.js';
 
 dotenv.config(); // For using env variables
 
@@ -15,8 +21,9 @@ app.use(express.json());
 // Cookie Parser
 app.use(cookieParser());
 
-// Route
+// Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/message', messageRoutes);
 
 // Server
 app.listen(PORT, () => {
