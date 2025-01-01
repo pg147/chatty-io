@@ -2,6 +2,7 @@
 import express from 'express'; 
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 // DB Connection function
 import { connectDB } from './lib/db.js';
@@ -20,6 +21,12 @@ app.use(express.json());
 
 // Cookie Parser
 app.use(cookieParser());
+
+// CORS 
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}))
 
 // Routes
 app.use('/api/auth', authRoutes);
