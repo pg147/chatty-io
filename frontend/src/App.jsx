@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom"
 
 // Loader
-import { Loader } from 'lucide-react'
+import { LoaderCircle } from 'lucide-react'
 
 // Components
 import { useAuthStore } from "./store/useAuthStore";
@@ -30,7 +30,7 @@ export default function App() {
   if (isCheckingAuth && !authUser) {
     return(
       <div className="flex h-screen items-center justify-center">
-        <Loader className="size-10 animate-spin" />
+        <LoaderCircle className="size-10 animate-spin text-primary" />
       </div>
     )
   }
