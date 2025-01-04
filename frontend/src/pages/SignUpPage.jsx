@@ -1,11 +1,13 @@
 // React imports
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 // Global States
 import { useAuthStore } from "../store/useAuthStore";
 
 // Lucide Icon Library
 import { LoaderCircle, LucideEye, LucideEyeClosed, LucideLock, LucideMail, LucideMessageSquare, LucideUser2 } from 'lucide-react';
+import Pattern from "../components/Pattern";
 
 export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -35,7 +37,7 @@ export default function SignUpPage() {
   return (
     <div className="h-screen w-full lg:flex">
       {/* Left Container - Signup Form */}
-      <div className="px-4 lg:px-0 lg:w-1/2 flex items-center justify-center border-r-2 border-r-gray-500">
+      <div className="px-4 lg:px-0 lg:w-1/2 flex items-center justify-center bg-[#FCFCFC]">
 
         {/* Content */}
         <div className="grid gap-y-10 lg:gap-y-14 w-full lg:w-fit">
@@ -110,7 +112,7 @@ export default function SignUpPage() {
               </div>
 
               {/* Submit button */}
-              <button type="submit" className="bg-primary lg:hover:bg-primary/90 transition-colors duration-300 ease-out text-white h-[55px] rounded-xl">
+              <button type="submit" disabled={isSigningUp} className="bg-primary lg:hover:bg-primary/90 transition-colors duration-300 ease-out text-white h-[55px] rounded-xl">
                 {isSigningUp ? (
                   <span>
                     <LoaderCircle className="size-5 animate-spin text-white" />
@@ -124,19 +126,23 @@ export default function SignUpPage() {
                 <p className="font-medium text-sm text-center">
                   Already have an account? {" "}
                   <span className="text-primary lg:hover:underline font-semibold">
-                    <a href="/login">Log in</a>
+                    <Link to={"/login"}>Login</Link>
                   </span>
                 </p>
               </div>
             </div>
           </form>
-          
+
         </div>
       </div>
 
       {/* Right Container */}
-      <div className="hidden lg:block w-1/2">
-
+      <div className="hidden w-1/2 lg:flex flex-col items-center justify-center">
+        <Pattern />
+        <div className="text-center w-fit mx-auto mt-12">
+          <h1 className="text-2xl font-bold">Join our <span className="text-primary">community</span></h1>
+          <p className="text-sm font-medium mt-3">Connect with friends, share moments and stay in touch with your loved ones!</p>
+        </div>
       </div>
     </div>
   )
