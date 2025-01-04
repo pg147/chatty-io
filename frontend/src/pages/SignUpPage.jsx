@@ -4,7 +4,7 @@ import { LucideLock, LucideMail, LucideMessageSquare, LucideUser2 } from 'lucide
 
 export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
+  const [forlgata, setForlgata] = useState({
     name: '',
     email: '',
     password: '',
@@ -21,10 +21,12 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="h-screen w-full flex">
+    <div className="h-screen w-full lg:flex">
       {/* Left Container - Signup Form */}
-      <div className="md:w-1/2 flex items-center justify-center border-r-2 border-r-gray-500">
-        <div className="grid gap-y-14">
+      <div className="px-4 lg:px-0 lg:w-1/2 flex items-center justify-center border-r-2 border-r-gray-500">
+        
+        {/* Content */}
+        <div className="grid gap-y-10 lg:gap-y-14 w-full lg:w-fit">
           {/* Brand */}
           <div className="w-full">
             <div className="h-fit w-fit mx-auto bg-primary/10 rounded-lg p-2.5">
@@ -36,6 +38,7 @@ export default function SignUpPage() {
             </div>
           </div>
 
+          {/* Input Fields */}
           <div className="grid gap-y-6">
             {/* Input field - Full Name */}
             <div className="grid gap-y-3">
@@ -44,7 +47,7 @@ export default function SignUpPage() {
                 <input
                   type="text"
                   placeholder="e.g. doejohn@gmail.com"
-                  className="h-[55px] w-[500px] pl-11 border border-gray-300 rounded-xl"
+                  className="h-[55px] w-full lg:w-[500px] pl-11 border border-gray-300 rounded-xl"
                 />
                 <LucideUser2 className="h-5 w-5 mx-4 absolute inset-0 my-auto text-gray-400 " />
               </div>
@@ -57,7 +60,7 @@ export default function SignUpPage() {
                 <input
                   type="email"
                   placeholder="e.g. doejohn@gmail.com"
-                  className="h-[55px] w-[500px] pl-11 border border-gray-300 rounded-xl"
+                  className="h-[55px] w-full lg:w-[500px] pl-11 border border-gray-300 rounded-xl"
                 />
                 <LucideMail className="h-5 w-5 mx-4 absolute inset-0 my-auto text-gray-400 " />
               </div>
@@ -71,19 +74,22 @@ export default function SignUpPage() {
                 <input
                   type="password"
                   placeholder="Your password"
-                  className="h-[55px] w-[500px] pl-11 border border-gray-300 rounded-xl"
+                  className="h-[55px] w-full lg:w-[500px] pl-11 border border-gray-300 rounded-xl"
                 />
               </div>
             </div>
 
+            {/* Submit button */}
             <button type="submit" className="bg-primary text-white h-[55px] rounded-xl">Create an account</button>
-
+          
+            {/* Quick Link */}
+            <h1 className="font-medium text-sm text-center">Already have an account? <span className="text-primary underline font-semibold"><a href="/login">Log in</a></span></h1>
           </div>
         </div>
       </div>
 
       {/* Right Container */}
-      <div className="w-1/2">
+      <div className="hidden lg:block w-1/2">
 
       </div>
     </div>
