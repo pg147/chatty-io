@@ -87,7 +87,7 @@ export const login = async (req, res) => {
 export const logout = (req, res) => {
     try {
         // Removing cookie to destroy session 
-        res.cookie("us_er_tok_en", "", { maxAge: 0 });
+        res.cookie("user", " ", { maxAge: 0 });
         res.status(201).json({ message: "You were logged out successfully!" });
     } catch (error) {
         console.log(`Error logging out : ${error}`);
