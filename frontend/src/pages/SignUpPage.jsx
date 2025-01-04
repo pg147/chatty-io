@@ -1,5 +1,6 @@
 // React imports
 import { useState } from "react"
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom"
 
 // Global States
@@ -7,8 +8,9 @@ import { useAuthStore } from "../store/useAuthStore";
 
 // Lucide Icon Library
 import { LoaderCircle, LucideEye, LucideEyeClosed, LucideLock, LucideMail, LucideMessageSquare, LucideUser2 } from 'lucide-react';
+
+// Components
 import Pattern from "../components/Pattern";
-import toast from "react-hot-toast";
 
 export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
