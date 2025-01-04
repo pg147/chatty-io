@@ -54,7 +54,7 @@ export default function SignUpPage() {
   return (
     <div className="h-screen w-full lg:flex">
       {/* Left Container - Signup Form */}
-      <div className="px-4 lg:px-0 lg:w-1/2 flex items-center justify-center bg-[#FCFCFC]">
+      <div className="h-screen px-4 lg:px-0 lg:w-1/2 flex items-center justify-center bg-[#FCFCFC]">
 
         {/* Content */}
         <div className="grid gap-y-10 lg:gap-y-14 w-full lg:w-fit">
