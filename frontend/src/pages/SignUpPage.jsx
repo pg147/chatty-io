@@ -8,6 +8,7 @@ import { useAuthStore } from "../store/useAuthStore";
 // Lucide Icon Library
 import { LoaderCircle, LucideEye, LucideEyeClosed, LucideLock, LucideMail, LucideMessageSquare, LucideUser2 } from 'lucide-react';
 import Pattern from "../components/Pattern";
+import toast from "react-hot-toast";
 
 export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,7 +22,18 @@ export default function SignUpPage() {
 
   // Function to validate all input fields
   const validateForm = () => {
+    // Full Name validations
+    if (!formData.name) return toast.error("Fullname is required!");
 
+    // Email Validations
+    if (!formData.email) return toast.error("Email is required!");
+    if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Invalid email format!");
+    
+    // Password validations
+    if (!formData.password) return toast.error("Password not entered !");
+    if(formData.password.length < 6) return toast.error("Password must be at least 6 characters")
+  
+    return true;
   }
 
   // Function to show or hide password
@@ -31,7 +43,10 @@ export default function SignUpPage() {
 
   // Function to handle form submit
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // preventing default reload
+
+    const success = validateForm(); // If validations passed
+    if (success === true) signUp(formData);
   }
 
   return (
@@ -114,10 +129,10 @@ export default function SignUpPage() {
               {/* Submit button */}
               <button type="submit" disabled={isSigningUp} className="bg-primary lg:hover:bg-primary/90 transition-colors duration-300 ease-out text-white h-[55px] rounded-xl">
                 {isSigningUp ? (
-                  <span>
+                  <div className="w-fit mx-auto flex items-center justify-center gap-x-3">
                     <LoaderCircle className="size-5 animate-spin text-white" />
                     <p>Signing up</p>
-                  </span>
+                  </div>
                 ) : 'Create an account'}
               </button>
 
