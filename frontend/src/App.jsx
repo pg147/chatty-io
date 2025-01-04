@@ -4,6 +4,8 @@ import { useEffect } from "react";
 // React-Router-DOM
 import { Navigate, Route, Routes } from "react-router-dom"
 
+import { Toaster } from 'react-hot-toast';
+
 // Loader
 import { LoaderCircle } from 'lucide-react'
 
@@ -25,10 +27,8 @@ export default function App() {
     checkAuth();
   }, [checkAuth]);
 
-  console.log({ authUser });
-
   if (isCheckingAuth && !authUser) {
-    return(
+    return (
       <div className="flex h-screen items-center justify-center">
         <LoaderCircle className="size-10 animate-spin text-primary" />
       </div>
@@ -38,13 +38,14 @@ export default function App() {
   return (
     <>
       <Navbar />
-      <Routes>
-        <Route path="/" element={authUser ? <HomePage /> : <Navigate to={"/login"} />} />
-        <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to={"/"} />} />
-        <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to={"/"} />} />
-        <Route path="/settings" element={<SettingsPage />} />
-        <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to={"login"} />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={authUser ? <HomePage /> : <Navigate to={"/login"} />} />
+          <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to={"/"} />} />
+          <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to={"/"} />} />
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to={"login"} />} />
+        </Routes>
+        <Toaster />
     </>
   );
 }
