@@ -1,5 +1,6 @@
 // Global States
 import { useAuthStore } from "../store/useAuthStore";
+import { Link } from "react-router-dom";
 
 // Icon Library
 import { LucideLogOut, LucideMessageSquare, LucideSettings, LucideUser2 } from "lucide-react";
@@ -32,12 +33,14 @@ export default function Navbar() {
 
         {authUser && <>
           {/* Profile */}
-          <div className="cursor-pointer lg:px-5 lg:py-3 rounded-2xl border-[1.5px] border-stroke flex items-center gap-x-2.5 bg-light">
-            <div className="h-fit w-fit p-3 lg:p-0 rounded-full bg-[#FCFCFC] lg:bg-transparent">
-              <LucideUser2 className="size-6 lg:size-5 text-primary" />
+          <Link to={"/profile"} >
+            <div className="cursor-pointer lg:px-5 lg:py-3 rounded-2xl border-[1.5px] border-stroke flex items-center gap-x-2.5 bg-light">
+              <div className="h-fit w-fit p-3 lg:p-0 rounded-full bg-[#FCFCFC] lg:bg-transparent">
+                <LucideUser2 className="size-6 lg:size-5 text-primary" />
+              </div>
+              <h1 className="font-medium hidden lg:block">Profile</h1>
             </div>
-            <h1 className="font-medium hidden lg:block">Profile</h1>
-          </div>
+          </Link>
 
           {/* Logout */}
           <div onClick={logout} className="cursor-pointer lg:px-5 lg:py-3 rounded-2xl border-[1.5px] border-stroke flex items-center gap-x-2.5 bg-light">
