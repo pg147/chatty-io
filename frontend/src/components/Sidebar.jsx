@@ -7,8 +7,11 @@ import { useChatStore } from "../store/useChatStore"
 // Icon Library
 import { LucideUsersRound } from "lucide-react";
 
+// Components
+import SidebarSkeleton from "./skeletons/SidebarSkeleton";
+
 export default function Sidebar() {
-    const { users, getUsers, setSelectedUser } = useChatStore();
+    const { users, getUsers, setSelectedUser, isUsersLoading } = useChatStore();
 
     const handleUserClick = (userId) => {
         setSelectedUser(userId);
@@ -17,6 +20,9 @@ export default function Sidebar() {
     useEffect(() => {
         getUsers();
     }, [getUsers]);
+
+    // Render Skeleton Component while loading
+    if (isUsersLoading) return <SidebarSkeleton />
 
     return (
         <div className="grid gap-y-6 py-6">
@@ -37,11 +43,14 @@ export default function Sidebar() {
                 {users.map((users, index) => (
                     <div onClick={() => handleUserClick(users._id)} key={index} className="border-b-[1.5px] border-b-stroke px-6 py-5 hover:bg-light cursor-pointer">
                         <div className="flex gap-x-5 items-center">
+                            {/* User Avatar */}
                             <img
                                 src={users.profilePic}
                                 alt={users.name + '_profile'}
                                 className="size-12 rounded-full"
                             />
+                            
+                            {/* User Info */}
                             <div>
                                 <h1 className="font-semibold">{users.name}</h1>
                                 <div className="flex items-center gap-x-2 mt-2">
