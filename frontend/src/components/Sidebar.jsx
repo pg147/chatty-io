@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 // Global States
 import { useChatStore } from "../store/useChatStore"
+import { useAuthStore } from "../store/useAuthStore";
 
 // Icon Library
 import { LucideUsersRound } from "lucide-react";
@@ -11,12 +12,13 @@ import { LucideUsersRound } from "lucide-react";
 import SidebarSkeleton from "./skeletons/SidebarSkeleton";
 
 export default function Sidebar() {
-    const { users, getUsers, setSelectedUser, isUsersLoading } = useChatStore();
+    const { users, getUsers, selectedUser, setSelectedUser, isUsersLoading } = useChatStore();
+    const { onlineUsers } = useAuthStore();
 
     const handleUserClick = (userId) => {
         setSelectedUser(userId);
     }
-    
+
     useEffect(() => {
         getUsers();
     }, [getUsers]);
@@ -41,22 +43,33 @@ export default function Sidebar() {
             {/* User List */}
             <div>
                 {users.map((users, index) => (
-                    <div onClick={() => handleUserClick(users._id)} key={index} className="border-b-[1.5px] border-b-stroke px-6 py-5 hover:bg-light cursor-pointer">
+                    <div
+                        key={index}
+                        onClick={() => handleUserClick(users._id)}
+                        className={`border-b-[1.5px] border-b-stroke px-6 py-5 ${selectedUser === users._id ? 'bg-primary/10 hover:bg-none cursor-default' : 'hover:bg-light cursor-pointer'}`}
+                    >
                         <div className="flex gap-x-5 items-center">
                             {/* User Avatar */}
-                            <img
-                                src={users.profilePic}
-                                alt={users.name + '_profile'}
-                                className="size-12 rounded-full"
-                            />
-                            
+                            <div className="size-fit relative">
+                                <img
+                                    src={users.profilePic || '/avatar.svg'}
+                                    alt={users.name + '_profile'}
+                                    className="size-12 rounded-full bg-light"
+                                />
+                                {onlineUsers.includes(users._id) ? (<div className="absolute right-0 size-2 rounded-full border border-white bg-green-500"></div>) : null}
+                            </div>
+
                             {/* User Info */}
                             <div>
                                 <h1 className="font-semibold">{users.name}</h1>
-                                <div className="flex items-center gap-x-2 mt-2">
-                                    <div className="size-fit p-1 bg-red-400 rounded-full"></div>
-                                    <p className="font-medium text-sm text-subtitle">Offline</p>
-                                </div>
+                                { onlineUsers.includes(users._id) ? (
+                                    <p className="mt-2">Online</p>
+                                ) : (
+                                    <div className="flex items-center gap-x-2 mt-2">
+                                        <div className="size-fit p-1 bg-red-400 rounded-full"></div>
+                                        <p className="font-medium text-sm text-subtitle">Offline</p>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
