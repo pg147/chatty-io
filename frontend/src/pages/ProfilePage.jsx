@@ -36,7 +36,7 @@ export default function ProfilePage() {
             <img
               src={ selectedImg || authUser.profilePic || "/avatar.svg"}
               alt="avatar"
-              className="size-32 object-cover rounded-full"
+              className={`object-cover rounded-full ${ selectedImg || authUser.profilePic ? 'size-32 ' : 'size-20' }`}
             />
 
             {/* Update Button */}
@@ -54,7 +54,7 @@ export default function ProfilePage() {
           {/* CTA */}
           <div className="size-fit mx-auto mt-4">
             {isUpdatingProfile ? (
-              <div className="flex items-center justify-center text-sm font-semibold mt-5">
+              <div className="flex gap-x-3 items-center justify-center text-sm font-semibold mt-5">
                 <Loader2 className="size-5 text-primary animate-spin" />
                 <p>Uploading</p>
               </div>
