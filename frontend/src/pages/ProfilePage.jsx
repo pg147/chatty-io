@@ -1,10 +1,25 @@
-import { LucideUser2, LucideMail, LucideCamera } from "lucide-react";
+import { LucideUser2, LucideMail, LucideCamera, Loader2 } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
+import { useState } from "react";
 
 export default function ProfilePage() {
-  const { authUser } = useAuthStore();
+  const { authUser, isUpdatingProfile, updateProfileImage } = useAuthStore();
+  const [selectedImg, setSelectedImg] = useState(null);
 
-  console.log(authUser);
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+
+    reader.onload = async () => {
+      const base64Image = reader.result;
+      setSelectedImg(base64Image);
+      await updateProfileImage({ profilePic: base64Image });
+    }
+  }
 
   return (
     <div className="px-4 lg:px-0 mt-14 lg:mt-0 h-screen w-full flex flex-col items-center justify-center">
@@ -17,26 +32,36 @@ export default function ProfilePage() {
           </div>
 
           {/* Profile image */}
-          <div className="mt-9 relative size-fit mx-auto rounded-full border-2 border-stroke">
-            {authUser.profilePic ? (
-              <img
-                src=""
-                alt={authUser.name + "_profile_photo"}
-                className="size-16"
+          <div className={`mt-9 relative size-fit mx-auto rounded-full border-2 border-stroke ${authUser.profilePic || selectedImg ? 'p-0' : 'p-6'}`}>
+            <img
+              src={ selectedImg || authUser.profilePic || "/avatar.svg"}
+              alt="avatar"
+              className="size-32 object-cover rounded-full"
+            />
+
+            {/* Update Button */}
+            <label className={`absolute bottom-0 right-0 size-fit p-2 flex items-center justify-center bg-primary lg:hover:scale-[1.1] transition-all duration-200 ease-in-out cursor-pointer rounded-full ${isUpdatingProfile ? 'animate-pulse pointer-events-none' : ''}`}>
+              <LucideCamera className="size-5 text-white" />
+              <input
+                type="file"
+                onChange={handleImageUpload}
+                accept="image/*"
+                className="hidden"
               />
-            ) : (
-              <>
-                <div className="p-6">
-                  <LucideUser2 className="size-12 text-primary" />
-                </div>
-                <div className="absolute bottom-0 right-0 size-fit p-2 flex items-center justify-center bg-primary hover:bg-primary/90 cursor-pointer rounded-full">
-                  <LucideCamera className="size-4 text-white" />
-                </div>
-              </>
-            )}
+            </label>
           </div>
 
-          <p className="text-center text-sm font-semibold mt-5">Click the camera icon to update your profile picture</p>
+          {/* CTA */}
+          <div className="size-fit mx-auto mt-4">
+            {isUpdatingProfile ? (
+              <div className="flex items-center justify-center text-sm font-semibold mt-5">
+                <Loader2 className="size-5 text-primary animate-spin" />
+                <p>Uploading</p>
+              </div>
+            ) : (
+              <p>Click the camera icon to update your profile picture</p>
+            )}
+          </div>
 
           {/* User details */}
           <div className="mt-6 lg:mt-9 grid gap-y-6 w-full">
@@ -86,7 +111,7 @@ export default function ProfilePage() {
           <div className="w-full grid gap-y-3">
             <div className="w-full flex items-center justify-between">
               <label>Member since</label>
-              <p>{authUser.createdAt.slice(0,10)}</p>
+              <p>{authUser.createdAt.slice(0, 10)}</p>
             </div>
             <div className="w-full flex items-center justify-between">
               <label>Account status</label>
