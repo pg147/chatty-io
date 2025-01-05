@@ -7,7 +7,7 @@ export default function ProfilePage() {
   console.log(authUser);
 
   return (
-    <div className="px-4 lg:px-0 h-screen w-full flex flex-col items-center justify-center">
+    <div className="px-4 lg:px-0 mt-14 lg:mt-0 h-screen w-full flex flex-col items-center justify-center">
       <div className="w-full lg:max-w-2xl bg-white shadow-intense rounded-3xl px-4 lg:px-7">
         <div className="my-4 lg:my-7">
           {/* Headers */}
@@ -74,15 +74,31 @@ export default function ProfilePage() {
       </div>
 
       {/* Account information */}
-      <div className="w-full lg:max-w-2xl bg-white shadow-intense rounded-3xl px-4 lg:px-7">
+      <div className="mt-6 w-full lg:max-w-2xl bg-white shadow-intense rounded-3xl px-4 lg:px-7">
         <div className="my-4 lg:my-7">
           {/* Headers */}
-          <div className="size-fit mx-auto mt-7 lg:mt-0">
-            <h1 className="text-center text-xl font-semibold">Account Information</h1>
+          <div className="size-fit mt-7 lg:mt-0">
+            <h1 className="text-xl font-semibold">Account Information</h1>
+          </div>
+
+          <hr className="w-full my-4" />
+
+          <div className="w-full grid gap-y-3">
+            <div className="w-full flex items-center justify-between">
+              <label>Member since</label>
+              <p>{authUser.createdAt.slice(0,10)}</p>
+            </div>
+            <div className="w-full flex items-center justify-between">
+              <label>Account status</label>
+              <div className="flex items-center gap-x-3">
+                <div className="rounded-full size-2.5 animate-pulse bg-green-700"></div>
+                <h1>Active</h1>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      
+
     </div>
   )
 }
