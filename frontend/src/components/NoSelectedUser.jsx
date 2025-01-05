@@ -3,9 +3,9 @@ import { LucideMessageSquare } from "lucide-react";
 
 export default function NoSelectedUser() {
   return (
-    <div className="grid gap-y-9">
+    <div className="grid gap-y-5">
       {/* Brand */}
-      <div className="h-fit w-fit mx-auto bg-primary/10 rounded-lg p-4">
+      <div className="h-fit w-fit mx-auto bg-primary/10 rounded-lg p-4 animate-bounce">
         <LucideMessageSquare className="size-8 text-primary" />
       </div>
 
