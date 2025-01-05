@@ -1,4 +1,4 @@
-import { LucideUser2, LucideMail, LucideCamera, Loader2 } from "lucide-react";
+import { LucideUser2, LucideMail, LucideCamera, Loader2, LucideInfo } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import { useState } from "react";
 
@@ -59,7 +59,7 @@ export default function ProfilePage() {
                 <p>Uploading</p>
               </div>
             ) : (
-              <p>Click the camera icon to update your profile picture</p>
+              <p className="text-center text-sm px-12 lg:px-0">Click the camera icon to update your profile picture</p>
             )}
           </div>
 
@@ -102,13 +102,14 @@ export default function ProfilePage() {
       <div className="mt-6 w-full lg:max-w-2xl bg-white shadow-intense rounded-3xl px-4 lg:px-7">
         <div className="my-4 lg:my-7">
           {/* Headers */}
-          <div className="size-fit mt-7 lg:mt-0">
-            <h1 className="text-xl font-semibold">Account Information</h1>
+          <div className="size-fit mt-4 flex items-center gap-x-2 lg:mt-0">
+            <LucideInfo className="size-5 text-primary" />
+            <h1 className="text-base lg:text-xl font-semibold">Account Information</h1>
           </div>
 
           <hr className="w-full my-4" />
 
-          <div className="w-full grid gap-y-3">
+          <div className="w-full grid gap-y-2">
             <div className="w-full flex items-center justify-between">
               <label>Member since</label>
               <p>{authUser.createdAt.slice(0, 10)}</p>
@@ -123,7 +124,6 @@ export default function ProfilePage() {
           </div>
         </div>
       </div>
-
     </div>
   )
 }
