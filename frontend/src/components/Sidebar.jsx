@@ -8,8 +8,12 @@ import { useChatStore } from "../store/useChatStore"
 import { LucideUsersRound } from "lucide-react";
 
 export default function Sidebar() {
-    const { users, getUsers } = useChatStore();
+    const { users, getUsers, setSelectedUser } = useChatStore();
 
+    const handleUserClick = (userId) => {
+        setSelectedUser(userId);
+    }
+    
     useEffect(() => {
         getUsers();
     }, [getUsers]);
@@ -31,7 +35,7 @@ export default function Sidebar() {
             {/* User List */}
             <div>
                 {users.map((users, index) => (
-                    <div key={index} className="border-b-[1.5px] border-b-stroke px-6 py-5 hover:bg-light cursor-pointer">
+                    <div onClick={() => handleUserClick(users._id)} key={index} className="border-b-[1.5px] border-b-stroke px-6 py-5 hover:bg-light cursor-pointer">
                         <div className="flex gap-x-5 items-center">
                             <img
                                 src={users.profilePic}
