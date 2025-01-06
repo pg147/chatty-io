@@ -17,7 +17,7 @@ export default function ChatInterface() {
   }, [getMessages, selectedUser._id]);
 
   return (
-    <div className="relative h-[100vh] bg-light">
+    <div className="relative h-[100vh]">
       {/* User Info */}
       <ChatHeader />
 
