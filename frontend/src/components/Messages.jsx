@@ -1,5 +1,8 @@
-import { Loader2 } from "lucide-react";
+// Global States
 import { useChatStore } from "../store/useChatStore";
+
+// Skeleton Components
+import MessageSkeleton from "./skeletons/MessageSkeleton";
 
 export default function Messages() {
     const { isMessagesLoading, messages } = useChatStore();
@@ -7,8 +10,8 @@ export default function Messages() {
     return (
         <>
             {isMessagesLoading ? (
-                <div className="flex flex-col h-screen items-center justify-center">
-                    <Loader2 className="size-6 text-primary animate-spin" />
+                <div className="flex flex-col h-screen">
+                    <MessageSkeleton />
                 </div>
             ) : (
                 messages.length === 0 ? (
