@@ -45,7 +45,7 @@ export default function Sidebar() {
                 {users.map((users, index) => (
                     <div
                         key={index}
-                        onClick={() => handleUserClick(users._id)}
+                        onClick={() => handleUserClick(users)}
                         className={`border-b-[1.5px] border-b-stroke px-6 py-5 ${selectedUser === users._id ? 'bg-primary/10 hover:bg-none cursor-default' : 'hover:bg-light cursor-pointer'}`}
                     >
                         <div className="flex gap-x-5 items-center">
