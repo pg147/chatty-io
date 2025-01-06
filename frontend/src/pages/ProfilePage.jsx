@@ -1,6 +1,11 @@
-import { LucideUser2, LucideMail, LucideCamera, Loader2, LucideInfo } from "lucide-react";
-import { useAuthStore } from "../store/useAuthStore";
+// React Imports
 import { useState } from "react";
+
+// Global States
+import { useAuthStore } from "../store/useAuthStore";
+
+// Icon Library
+import { LucideUser2, LucideMail, LucideCamera, Loader2, LucideInfo } from "lucide-react";
 
 export default function ProfilePage() {
   const { authUser, isUpdatingProfile, updateProfileImage } = useAuthStore();

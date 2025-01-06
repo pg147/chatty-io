@@ -1,7 +1,9 @@
 // React imports
 import { useState } from "react"
-import toast from "react-hot-toast";
 import { Link } from "react-router-dom"
+
+// React Hot Toast
+import toast from "react-hot-toast";
 
 // Global States
 import { useAuthStore } from "../store/useAuthStore";

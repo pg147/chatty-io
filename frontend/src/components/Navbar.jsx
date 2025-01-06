@@ -1,6 +1,8 @@
+// React Imports
+import { Link } from "react-router-dom";
+
 // Global States
 import { useAuthStore } from "../store/useAuthStore";
-import { Link } from "react-router-dom";
 
 // Icon Library
 import { LucideLogOut, LucideMessageSquare, LucideSettings, LucideUser2 } from "lucide-react";
