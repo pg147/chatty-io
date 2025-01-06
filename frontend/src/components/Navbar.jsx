@@ -3,12 +3,19 @@ import { Link } from "react-router-dom";
 
 // Global States
 import { useAuthStore } from "../store/useAuthStore";
+import { useChatStore } from "../store/useChatStore";
 
 // Icon Library
 import { LucideLogOut, LucideMessageSquare, LucideSettings, LucideUser2 } from "lucide-react";
 
 export default function Navbar() {
   const { logout, authUser } = useAuthStore();
+  const { setSelectedUser } = useChatStore();
+
+  const handleLogout = () => {
+    setSelectedUser(null);
+    logout();
+  }
 
   return (
     <div className="h-fit w-full z-[10] flex items-center justify-between px-4 py-3 lg:px-8 lg:py-6 shadow-intense ">
@@ -45,7 +52,7 @@ export default function Navbar() {
           </Link>
 
           {/* Logout */}
-          <div onClick={logout} className="cursor-pointer lg:px-5 lg:py-3 rounded-2xl border-[1.5px] border-stroke flex items-center gap-x-2.5 bg-light">
+          <div onClick={handleLogout} className="cursor-pointer lg:px-5 lg:py-3 rounded-2xl border-[1.5px] border-stroke flex items-center gap-x-2.5 bg-light">
             <div className="h-fit w-fit p-3 lg:p-0 rounded-full bg-[#FCFCFC] lg:bg-transparent">
               <LucideLogOut className="size-6 lg:size-5 text-primary" />
             </div>
