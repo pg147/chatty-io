@@ -17,8 +17,16 @@ export default function HomePage() {
       </div>
 
       {/* Chat Interface */}
-      <div className="md:w-[70%] lg:w-[80%] bg-light hidden md:flex flex-col items-center justify-center">
-        {selectedUser ? <ChatInterface /> : <NoSelectedUser /> }
+      <div className="md:w-[70%] lg:w-[80%] h-screen hidden md:block ">
+        {selectedUser ? (
+          <div className="">
+            <ChatInterface />
+          </div>
+        ) : (
+          <div className="md:flex flex-col h-screen items-center justify-center bg-light">
+            <NoSelectedUser />
+          </div>
+        )}
       </div>
     </div>
   )
