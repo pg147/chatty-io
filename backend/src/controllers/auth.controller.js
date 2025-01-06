@@ -76,7 +76,7 @@ export const login = async (req, res) => {
 
         // If correct, generate token and send success status
         generateToken(user._id, res);
-        res.status(201).json({ message: `Welcome ${user.email} !` });
+        res.status(201).json(user);
 
     } catch (error) {
         console.log(`Error finding the user : ${error}`);
