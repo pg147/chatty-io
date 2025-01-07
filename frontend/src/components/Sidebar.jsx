@@ -56,16 +56,16 @@ export default function Sidebar() {
                                     alt={users.name + '_profile'}
                                     className="size-12 rounded-full bg-light"
                                 />
-                                {onlineUsers.includes(users._id) ? (<div className="absolute right-0 size-2 rounded-full border border-white bg-green-500"></div>) : null}
+                                {onlineUsers.includes(users._id) ? (<div className="absolute bottom-0 -right-1 size-4 rounded-full border-2 border-white bg-green-500"></div>) : null}
                             </div>
 
                             {/* User Info */}
                             <div>
                                 <h1 className="font-semibold">{users.name}</h1>
                                 { onlineUsers.includes(users._id) ? (
-                                    <p className="mt-2">Online</p>
+                                    <p className="">Online</p>
                                 ) : (
-                                    <div className="flex items-center gap-x-2 mt-2">
+                                    <div className="flex items-center gap-x-2 mt-1">
                                         <div className="size-fit p-1 bg-red-400 rounded-full"></div>
                                         <p className="font-medium text-sm text-subtitle">Offline</p>
                                     </div>

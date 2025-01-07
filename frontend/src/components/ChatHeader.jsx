@@ -21,14 +21,14 @@ export default function ChatHeader() {
                         alt={selectedUser.name + '_profile'}
                         className="size-12 rounded-full bg-light"
                     />
-                    {onlineUsers.includes(selectedUser._id) ? (<div className="absolute right-0 size-2 rounded-full border border-white bg-green-500"></div>) : null}
+                    {onlineUsers.includes(selectedUser._id) ? (<div className="absolute bottom-0 -right-1 size-4 rounded-full border-2 border-white bg-green-500"></div>) : null}
                 </div>
 
                 {/* User Info */}
                 <div>
                     <h1 className="font-semibold">{selectedUser.name}</h1>
                     {onlineUsers.includes(selectedUser._id) ? (
-                        <p className="mt-2">Online</p>
+                        <p className="">Online</p>
                     ) : (
                         <div className="flex items-center gap-x-2 mt-2">
                             <div className="size-fit p-1 bg-red-400 rounded-full"></div>
