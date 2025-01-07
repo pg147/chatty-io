@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
+import { app, server } from './lib/socket.js';
+
 // DB Connection function
 import { connectDB } from './lib/db.js';
 
@@ -13,8 +15,9 @@ import messageRoutes from './routes/message.route.js';
 
 dotenv.config(); // For using env variables
 
-const app = express(); // initialized express app
 const PORT = process.env.PORT; // defined PORT 
+
+// app used here is from socket.js 
 
 // JSON Middleware
 app.use(express.json());
@@ -32,8 +35,8 @@ app.use(cors({
 app.use('/api/auth', authRoutes);
 app.use('/api/messages', messageRoutes);
 
-// Server
-app.listen(PORT, () => {
+// Socket Server
+server.listen(PORT, () => {
     console.log(`Server running at : ${PORT}`);
     connectDB();
 })
