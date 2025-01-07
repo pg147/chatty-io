@@ -14,7 +14,8 @@ export default {
         stroke: "#F4F4F4",
         light: "#FCFCFC",
         subtitle: "#6A6A6A",
-        mediumDark: "#eeeeee"
+        mediumDark: "#EEEEEE",
+        dark: "#D1D1D1"
       },
       boxShadow: {
         intense: "0px 0px 16px rgba(17,17,26,0.1)"
