@@ -52,7 +52,7 @@ export default function Sidebar() {
                             {/* User Avatar */}
                             <div className="size-fit relative">
                                 <img
-                                    src={users.profilePic || '/avatar.svg'}
+                                    src={users.profilePic.length > 0 ? users.profilePic : '/avatar.svg'}
                                     alt={users.name + '_profile'}
                                     className="size-12 rounded-full bg-light"
                                 />

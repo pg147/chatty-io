@@ -39,9 +39,9 @@ export default function ProfilePage() {
           {/* Profile image */}
           <div className={`mt-9 relative size-fit mx-auto rounded-full border-2 border-stroke ${authUser.profilePic || selectedImg ? 'p-0' : 'p-6'}`}>
             <img
-              src={ selectedImg || authUser.profilePic || "/avatar.svg"}
+              src={ selectedImg || authUser.profilePic.length > 0 ? authUser.profilePic : "/avatar.svg"}
               alt="avatar"
-              className={`object-cover rounded-full ${ selectedImg || authUser.profilePic ? 'size-32 ' : 'size-20' }`}
+              className={`object-cover rounded-full ${ selectedImg || authUser.profilePic.length > 0 ? 'size-32 ' : 'size-20' }`}
             />
 
             {/* Update Button */}
