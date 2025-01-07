@@ -15,7 +15,7 @@ export default function MessageInputs() {
     const [imagePreview, setImagePreview] = useState(null);
     const fileInputRef = useRef(null);
 
-    const { sendMessage }  = useChatStore();
+    const { sendMessage } = useChatStore();
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -25,12 +25,12 @@ export default function MessageInputs() {
             toast.error("Please select a valid image!");
             return;
         }
-        
+
         const reader = new FileReader();
         reader.onloadend = () => {
             setImagePreview(reader.result);
         };
-        
+
         reader.readAsDataURL(file);
     }
 
@@ -62,25 +62,30 @@ export default function MessageInputs() {
     }
 
     return (
-        <div className="fixed bottom-0 w-full">
-            {/* Image Preview (If exists) */}
-            {imagePreview && <div className="size-fit relative mx-5 my-2">
-                <img
-                    src={imagePreview}
-                    alt="image_preview"
-                    className="size-24 rounded-2xl"
-                />
-                <button onClick={handleRemoveImage} className="absolute -right-2 -top-3 bg-primary p-1 size-fit rounded-full">
-                    <X className="text-white size-5" />
-                </button>
-            </div>}
+        <div className="w-full">
+            {/* Image Preview */}
+            {imagePreview && (
+                <div className="size-fit relative mx-5 my-2">
+                    <img
+                        src={imagePreview}
+                        alt="image_preview"
+                        className="size-24 rounded-2xl"
+                    />
+                    <button
+                        onClick={handleRemoveImage}
+                        className="absolute -right-2 -top-3 bg-primary p-1 size-fit rounded-full"
+                    >
+                        <X className="text-white size-5" />
+                    </button>
+                </div>
+            )}
 
             {/* User Inputs */}
-            <form onSubmit={handleSendMessage}>
-                <div className="flex space-x-5 w-full bg-white border-2 border-stroke p-4">
+            <form onSubmit={handleSendMessage} className="p-4 bg-white border-2 border-stroke">
+                <div className="flex items-center gap-x-3 w-full">
                     {/* Textfield */}
-                    <div className="relative w-[70%]">
-                        <div className="absolute inset-y-0 flex items-center pl-5">
+                    <div className="relative flex-1">
+                        <div className="absolute inset-y-0 left-6 flex items-center">
                             <LucideKeyboard className="text-primary size-5" />
                         </div>
                         <input
@@ -88,12 +93,12 @@ export default function MessageInputs() {
                             value={text}
                             onChange={(e) => setText(e.target.value)}
                             placeholder="Type a message"
-                            className="h-14 w-full pl-12 border-2 outline-primary border-stroke rounded-2xl"
+                            className="w-full h-12 pl-14 pr-4 border border-stroke rounded-full outline-primary bg-light/50"
                         />
                     </div>
 
-                    {/* More */}
-                    <div className="flex items-center gap-x-5 w-[30%]">
+                    {/* Action Buttons */}
+                    <div className="flex gap-x-2">
                         {/* Attach Image Button */}
                         <input
                             type="file"
@@ -104,7 +109,7 @@ export default function MessageInputs() {
                         />
                         <button
                             type="button"
-                            className="hidden size-14 sm:flex items-center justify-center bg-light hover:bg-mediumDark/40 cursor-pointer border-2 border-stroke rounded-xl"
+                            className="hidden sm:flex items-center justify-center size-12 bg-light hover:bg-mediumDark/40 border border-stroke rounded-full"
                             onClick={() => fileInputRef.current?.click()}
                         >
                             <LucideImagePlus className="text-primary size-5" />
@@ -114,7 +119,7 @@ export default function MessageInputs() {
                         <button
                             type="submit"
                             disabled={!text.trim() && !imagePreview}
-                            className="size-14 flex items-center justify-center bg-primary/10 hover:bg-primary/15 cursor-pointer rounded-xl"
+                            className="flex items-center justify-center size-12 bg-primary/10 hover:bg-primary/15 rounded-full disabled:opacity-50"
                         >
                             <LucideSend className="text-primary size-5" />
                         </button>

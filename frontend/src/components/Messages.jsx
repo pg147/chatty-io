@@ -2,6 +2,9 @@
 import { useChatStore } from "../store/useChatStore";
 import { useAuthStore } from "../store/useAuthStore";
 
+// Utils
+import { formatMessageTime } from "../lib/utils.js";
+
 // Icon Library
 import { LucideMessageCircle } from "lucide-react";
 
@@ -13,7 +16,7 @@ export default function Messages() {
     const { authUser } = useAuthStore();
 
     return (
-        <div className="h-screen bg-light">
+        <div className="bg-light">
             {isMessagesLoading ? (
                 <div className="flex flex-col h-screen">
                     <MessageSkeleton />
@@ -33,7 +36,7 @@ export default function Messages() {
                                 key={index}
                                 className={`w-full flex ${authUser._id === message.senderId ? 'justify-end' : 'justify-start'}`}
                             >
-                                <div className={`w-fit flex gap-x-4 mb-6 ${authUser._id === message.senderId ? ' flex-row-reverse' : ''}`}>
+                                <div className={`w-fit flex items-end gap-x-4 mb-6 ${authUser._id === message.senderId ? ' flex-row-reverse' : ''}`}>
                                     <div className="size-fit">
                                         <img
                                             src={authUser._id === message.senderId ? authUser.profilePic : selectedUser.profilePic}
@@ -41,10 +44,10 @@ export default function Messages() {
                                         />
                                     </div>
                                     <div>
-                                        <h1 className="text-right text-sm font-semibold">{message.createdAt}</h1>
+                                        <h1 className={`${authUser._id === message.senderId ? 'text-right' : 'text-left'} text-sm text-subtitle font-semibold`}>{formatMessageTime(message.createdAt)}</h1>
                                         <div className={`h-fit mt-3 p-4 rounded-2xl max-w-sm ${authUser._id === message.senderId ? 'bg-primary/25' : 'bg-mediumDark'}`}>
                                             {message.image && <div className="size-36 mt-3">
-                                                <img src={message.image} alt="image" className="size-fit object-cover" />
+                                                <img src={message.image} alt="image" className="object-cover" />
                                             </div>}
                                             {message.text && <p>{message.text}</p>}
                                         </div>

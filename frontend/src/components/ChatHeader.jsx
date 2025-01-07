@@ -12,7 +12,7 @@ export default function ChatHeader() {
     const handleCloseChat = () => setSelectedUser(null);
 
     return (
-        <div className="sticky top-0 z-[5] w-full px-6 py-3 flex items-center bg-white justify-between border-2 border-stroke">
+        <div className="z-[5] w-full px-6 py-3 flex items-center bg-white justify-between border-2 border-stroke">
             <div className="flex gap-x-5 items-center">
                 {/* User Avatar */}
                 <div className="size-fit relative">
