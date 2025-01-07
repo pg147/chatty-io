@@ -29,50 +29,28 @@ export default function Messages() {
                 ) : (
                     <div className="flex-1 flex flex-col p-9">
                         {messages.map((message, index) => (
-                            authUser._id === message.senderId ? (
-                                <div
-                                    key={index}
-                                    className={`w-full flex justify-end`}
-                                >
-                                    <div className="w-fit flex gap-x-4 flex-row-reverse mb-6">
-                                        <div className="size-fit">
-                                            <img
-                                                src={authUser.profilePic}
-                                                className="size-10 rounded-full"
-                                            />
-                                        </div>
-                                        <div>
-                                            <h1 className="text-right text-sm font-semibold">{message.createdAt}</h1>
+                            <div
+                                key={index}
+                                className={`w-full flex ${authUser._id === message.senderId ? 'justify-end' : 'justify-start'}`}
+                            >
+                                <div className={`w-fit flex gap-x-4 mb-6 ${authUser._id === message.senderId ? ' flex-row-reverse' : ''}`}>
+                                    <div className="size-fit">
+                                        <img
+                                            src={authUser._id === message.senderId ? authUser.profilePic : selectedUser.profilePic}
+                                            className="size-10 rounded-full"
+                                        />
+                                    </div>
+                                    <div>
+                                        <h1 className="text-right text-sm font-semibold">{message.createdAt}</h1>
+                                        <div className={`h-fit mt-3 p-4 rounded-2xl max-w-sm ${authUser._id === message.senderId ? 'bg-primary/25' : 'bg-mediumDark'}`}>
                                             {message.image && <div className="size-36 mt-3">
                                                 <img src={message.image} alt="image" className="size-fit object-cover" />
                                             </div>}
-                                            <div className="bg-primary/25 h-fit mt-3 p-4 rounded-2xl max-w-sm">
-                                                <p>{message.text}</p>
-                                            </div>
+                                            {message.text && <p>{message.text}</p>}
                                         </div>
                                     </div>
                                 </div>
-                            ) : (
-                                <div
-                                    key={index}
-                                    className={`w-full flex justify-start`}
-                                >
-                                    <div className="w-fit flex gap-x-4 mb-6">
-                                        <div className="size-fit">
-                                            <img
-                                                src={selectedUser.profilePic}
-                                                className="size-10 rounded-full"
-                                            />
-                                        </div>
-                                        <div>
-                                            <h1 className="text-left text-sm font-semibold">{message.createdAt}</h1>
-                                            <div className="bg-mediumDark h-fit mt-3 p-4 rounded-2xl max-w-sm">
-                                                <p>{message.text}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
+                            </div>
                         ))}
                     </div>
                 )
