@@ -34,10 +34,6 @@ export default function Sidebar() {
                     <LucideUsersRound className="size-6 text-primary" />
                     <p className="font-semibold text-lg">Contacts</p>
                 </div>
-                <div className="mt-3 flex items-center gap-x-2">
-                    <input type="checkbox" className="size-4 rounded-xl" />
-                    <p className="text-sm font-medium">Show online users only</p>
-                </div>
             </div>
 
             {/* User List */}
@@ -56,19 +52,17 @@ export default function Sidebar() {
                                     alt={users.name + '_profile'}
                                     className="size-12 rounded-full bg-light"
                                 />
-                                {onlineUsers.includes(users._id) ? (<div className="absolute bottom-0 -right-1 size-4 rounded-full border-2 border-white bg-green-500"></div>) : null}
+                                <div className={`absolute bottom-0 -right-1 size-4 rounded-full border-2 border-white ${onlineUsers.includes(users._id) ? 'bg-green-500' : 'bg-dark'}`}>
+                                </div>
                             </div>
 
                             {/* User Info */}
                             <div>
                                 <h1 className="font-semibold">{users.name}</h1>
-                                { onlineUsers.includes(users._id) ? (
-                                    <p className="">Online</p>
+                                {onlineUsers.includes(users._id) ? (
+                                    <p className="font-medium text-sm text-green-500">Online</p>
                                 ) : (
-                                    <div className="flex items-center gap-x-2 mt-1">
-                                        <div className="size-fit p-1 bg-red-400 rounded-full"></div>
-                                        <p className="font-medium text-sm text-subtitle">Offline</p>
-                                    </div>
+                                    <p className="font-medium text-sm text-subtitle">Offline</p>
                                 )}
                             </div>
                         </div>
