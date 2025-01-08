@@ -10,7 +10,7 @@ import Messages from "./Messages";
 import MessageInputs from "./MessageInputs";
 
 export default function ChatInterface() {
-  const { selectedUser, getMessages } = useChatStore();
+  const { selectedUser, getMessages, subscribeToMessages, unsubscribeToMessages } = useChatStore();
   const messagesRef = useRef(null);
 
   useEffect(() => {
@@ -19,7 +19,10 @@ export default function ChatInterface() {
     }
 
     getMessages(selectedUser._id);
-  }, [getMessages, selectedUser._id]);
+    subscribeToMessages();
+
+    return () => unsubscribeToMessages();
+  }, [getMessages, selectedUser._id, subscribeToMessages, unsubscribeToMessages]);
 
   return (
     <div className="relative h-screen flex flex-col">
