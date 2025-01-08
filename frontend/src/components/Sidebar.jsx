@@ -1,5 +1,5 @@
 // React imports
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // Global States
 import { useChatStore } from "../store/useChatStore"
@@ -14,14 +14,21 @@ import SidebarSkeleton from "./skeletons/SidebarSkeleton";
 export default function Sidebar() {
     const { users, getUsers, selectedUser, setSelectedUser, isUsersLoading } = useChatStore();
     const { onlineUsers } = useAuthStore();
+    const [showOnlineUsers, setShowOnlineUsers] = useState(false);
 
     const handleUserClick = (userId) => {
         setSelectedUser(userId);
     }
 
+    const handleOnlineUsers = () => {
+        setShowOnlineUsers(!showOnlineUsers);
+    }
+
     useEffect(() => {
         getUsers();
     }, [getUsers]);
+
+    const filteredUsers = showOnlineUsers ? users.filter(user => onlineUsers.includes(user._id)) : users;
 
     // Render Skeleton Component while loading
     if (isUsersLoading) return <SidebarSkeleton />
@@ -29,16 +36,28 @@ export default function Sidebar() {
     return (
         <div className="grid gap-y-6 py-6">
             {/* Headers */}
-            <div className="px-6">
+            <div className="px-6 space-y-4">
                 <div className="flex items-center gap-x-2.5">
                     <LucideUsersRound className="size-6 text-primary" />
                     <p className="font-semibold text-lg">Contacts</p>
+                </div>
+                <div className="flex items-center gap-x-1">
+                    <div className="flex items-center gap-x-2.5">
+                        <input
+                            type="checkbox"
+                            className="checkbox size-5 [--chkbg:theme(colors.primary)] [--chkfg:white] checked:border-primary"
+                            checked={showOnlineUsers}
+                            onChange={handleOnlineUsers}
+                        />
+                        <p className="font-semibold text-sm">Show online only</p>
+                    </div>
+                    {showOnlineUsers && <p className="text-sm text-subtitle font-semibold">{`(${onlineUsers.length > 0 ? onlineUsers.length - 1 : 0})`}</p>} 
                 </div>
             </div>
 
             {/* User List */}
             <div>
-                {users.map((users, index) => (
+                {filteredUsers.map((users, index) => (
                     <div
                         key={index}
                         onClick={() => handleUserClick(users)}
