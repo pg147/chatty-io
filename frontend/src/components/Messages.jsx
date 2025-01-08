@@ -1,3 +1,6 @@
+// React imports
+import { useEffect, useRef } from "react";
+
 // Global States
 import { useChatStore } from "../store/useChatStore";
 import { useAuthStore } from "../store/useAuthStore";
@@ -12,8 +15,15 @@ import { LucideMessageCircle } from "lucide-react";
 import MessageSkeleton from "./skeletons/MessageSkeleton";
 
 export default function Messages() {
+    const messageRef = useRef(null);
     const { isMessagesLoading, messages, selectedUser } = useChatStore();
     const { authUser } = useAuthStore();
+
+    useEffect(() => {
+        if (messageRef.current && messages) {
+            messageRef.current.scrollIntoView({ behavior: 'smooth' });
+        };
+    }, [messages, selectedUser._id]);
 
     return (
         <div className="bg-light">
@@ -34,6 +44,7 @@ export default function Messages() {
                         {messages.map((message, index) => (
                             <div
                                 key={index}
+                                ref={messageRef}
                                 className={`w-full flex ${authUser._id === message.senderId ? 'justify-end' : 'justify-start'}`}
                             >
                                 <div className={`w-fit flex items-end gap-x-4 mb-6 ${authUser._id === message.senderId ? ' flex-row-reverse' : ''}`}>
