@@ -27,7 +27,7 @@ export default function Messages() {
 
     return (
         <div className="bg-light">
-            {isMessagesLoading ? (
+            {true ? (
                 <div className="flex flex-col h-screen">
                     <MessageSkeleton />
                 </div>
@@ -56,7 +56,7 @@ export default function Messages() {
                                     </div>
                                     <div>
                                         <h1 className={`${authUser._id === message.senderId ? 'text-right' : 'text-left'} text-xs md:text-sm text-subtitle font-regular`}>{formatMessageTime(message.createdAt)}</h1>
-                                        <div className={`h-fit mt-2 md:mt-3 p-3 md:p-4 rounded-2xl max-w-xs md:max-w-sm font-regular ${authUser._id === message.senderId ? 'bg-primary/90' : 'bg-mediumDark'}`}>
+                                        <div className={`h-fit mt-2 md:mt-3 p-3 md:p-4 rounded-2xl max-w-[200px] md:max-w-sm font-regular ${authUser._id === message.senderId ? 'bg-primary/90' : 'bg-mediumDark'}`}>
                                             {message.image && <div className="size-36 mt-3">
                                                 <img src={message.image} alt="image" className="object-cover" />
                                             </div>}
