@@ -25,8 +25,8 @@ export default function Navbar() {
           <LucideMessageSquare className="size-6 text-primary" />
         </div>
         <div>
-          <h1 className="text-lg lg:text-xl font-bold">Chatty</h1>
-          <p className="text-sm">by <span className="font-semibold text-primary">PG</span></p>
+          <h1 className="text-lg lg:text-xl font-semibold">Chatty</h1>
+          <p className="text-sm font-medium">by <span className="font-semibold text-primary">PG</span></p>
         </div>
       </div>
 

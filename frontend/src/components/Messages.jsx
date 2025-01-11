@@ -55,12 +55,12 @@ export default function Messages() {
                                         />
                                     </div>
                                     <div>
-                                        <h1 className={`${authUser._id === message.senderId ? 'text-right' : 'text-left'} text-sm text-subtitle font-semibold`}>{formatMessageTime(message.createdAt)}</h1>
-                                        <div className={`h-fit mt-3 p-4 rounded-2xl max-w-sm ${authUser._id === message.senderId ? 'bg-primary/25' : 'bg-mediumDark'}`}>
+                                        <h1 className={`${authUser._id === message.senderId ? 'text-right' : 'text-left'} text-sm text-subtitle font-regular`}>{formatMessageTime(message.createdAt)}</h1>
+                                        <div className={`h-fit mt-3 p-4 rounded-2xl max-w-sm font-regular ${authUser._id === message.senderId ? 'bg-primary/90' : 'bg-mediumDark'}`}>
                                             {message.image && <div className="size-36 mt-3">
                                                 <img src={message.image} alt="image" className="object-cover" />
                                             </div>}
-                                            {message.text && <p>{message.text}</p>}
+                                            {message.text && <p className={`${authUser._id === message.senderId ? 'text-white' : 'text-black'}`}>{message.text}</p>}
                                         </div>
                                     </div>
                                 </div>

@@ -39,7 +39,7 @@ export default function Sidebar() {
             <div className="px-6 space-y-4">
                 <div className="flex items-center gap-x-2.5">
                     <LucideUsersRound className="size-6 text-primary" />
-                    <p className="font-semibold text-lg">Contacts</p>
+                    <p className="font-medium text-lg">Contacts</p>
                 </div>
                 <div className="flex items-center gap-x-1">
                     <div className="flex items-center gap-x-2.5">
@@ -49,7 +49,7 @@ export default function Sidebar() {
                             checked={showOnlineUsers}
                             onChange={handleOnlineUsers}
                         />
-                        <p className="font-semibold text-sm">Show online only</p>
+                        <p className="font-regular text-sm">Show online only</p>
                     </div>
                     {showOnlineUsers && <p className="text-sm text-subtitle font-semibold">{`(${onlineUsers.length > 0 ? onlineUsers.length - 1 : 0})`}</p>} 
                 </div>
@@ -79,9 +79,9 @@ export default function Sidebar() {
                             <div>
                                 <h1 className="font-semibold">{users.name}</h1>
                                 {onlineUsers.includes(users._id) ? (
-                                    <p className="font-medium text-sm text-green-500">Online</p>
+                                    <p className="font-regular text-sm text-green-500">Online</p>
                                 ) : (
-                                    <p className="font-medium text-sm text-subtitle">Offline</p>
+                                    <p className="font-regular text-sm text-subtitle">Offline</p>
                                 )}
                             </div>
                         </div>

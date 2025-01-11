@@ -93,7 +93,7 @@ export default function MessageInputs() {
                             value={text}
                             onChange={(e) => setText(e.target.value)}
                             placeholder="Type a message"
-                            className="w-full h-12 pl-14 pr-4 border border-stroke rounded-full outline-primary bg-light/50"
+                            className="w-full h-12 pl-14 pr-4 font-regular border border-stroke rounded-full outline-primary bg-light/50"
                         />
                     </div>
 
