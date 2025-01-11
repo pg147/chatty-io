@@ -4,12 +4,19 @@ import { useChatStore } from "../store/useChatStore";
 
 // Icon Library
 import { LucideX } from "lucide-react";
+import { useHelperStore } from "../store/useHelperStore";
 
 export default function ChatHeader() {
     const { selectedUser, setSelectedUser } = useChatStore();
     const { onlineUsers } = useAuthStore();
+    const { closeChat } = useHelperStore();
 
-    const handleCloseChat = () => setSelectedUser(null);
+    const handleCloseChat = () => {
+        if (window.innerWidth < 768) {
+            closeChat();
+            setSelectedUser(null);
+        } else setSelectedUser(null);
+    };
 
     return (
         <div className="z-[5] w-full px-6 py-3 flex items-center bg-white justify-between border-2 border-stroke">
