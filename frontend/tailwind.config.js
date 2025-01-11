@@ -12,7 +12,7 @@ export default {
       fontFamily: {
         regular: ['Aeonik-Regular'],
         medium: ['Aeonik-Medium'],
-        bold: ['Aeonik-Bold']
+        semibold: ['Aeonik-Semibold']
       },
       colors: {
         primary: "#1074F0",

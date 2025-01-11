@@ -15,7 +15,7 @@
 }
 
 @font-face {
-    font-family: "Aeonik-Bold";
-    src: local("Aeonik-Bold"),
+    font-family: "Aeonik-Semibold";
+    src: local("Aeonik-Semibold"),
     url('./fonts/Aeonik-Bold.ttf'), format("truetype");
 }
