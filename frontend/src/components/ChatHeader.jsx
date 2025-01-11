@@ -4,19 +4,18 @@ import { useChatStore } from "../store/useChatStore";
 
 // Icon Library
 import { LucideX } from "lucide-react";
-import { useHelperStore } from "../store/useHelperStore";
 
-export default function ChatHeader() {
-    const { selectedUser, setSelectedUser } = useChatStore();
+// Prop Types Dependency
+import PropTypes from "prop-types";
+
+// Declaration of Prop Types
+ChatHeader.propTypes = {
+    onClose: PropTypes.func.isRequired,
+};
+
+export default function ChatHeader({ onClose }) {
+    const { selectedUser } = useChatStore();
     const { onlineUsers } = useAuthStore();
-    const { closeChat } = useHelperStore();
-
-    const handleCloseChat = () => {
-        if (window.innerWidth < 768) {
-            closeChat();
-            setSelectedUser(null);
-        } else setSelectedUser(null);
-    };
 
     return (
         <div className="z-[5] w-full px-6 py-3 flex items-center bg-white justify-between border-2 border-stroke">
@@ -44,7 +43,7 @@ export default function ChatHeader() {
             </div>
 
             {/* Close Menu */}
-            <div onClick={handleCloseChat} className="cursor-pointer size-fit p-2 rounded-full hover:bg-primary/10">
+            <div onClick={onClose} className="cursor-pointer size-fit p-2 rounded-full hover:bg-primary/10">
                 <LucideX className="size-6 text-primary" />
             </div>
         </div>

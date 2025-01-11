@@ -8,26 +8,33 @@ import ChatInterface from "../components/ChatInterface";
 import NoSelectedUser from "../components/NoSelectedUser";
 
 export default function HomePage() {
-  const { selectedUser } = useChatStore();
-  const { isChatOpen } = useHelperStore();
+  const { selectedUser, setSelectedUser } = useChatStore();
+  const { isChatOpen, closeChat } = useHelperStore();
+
+  const isMobile = window.innerHeight < 768;
+
+  const handleCloseChat = () => {
+    setSelectedUser(null); // Clear the selected user
+    closeChat();
+  }
 
   return (
     <div className="w-full h-screen md:flex">
       {/* Sidemenu - Users */}
-      <div className={`h-screen w-full md:w-[30%] lg:w-[20%] ${selectedUser && isChatOpen && window.innerWidth < 768 ? 'hidden' : 'block'}`}>
+      <div className={`h-screen w-full md:w-[30%] lg:w-[20%] ${selectedUser && isChatOpen && isMobile ? 'hidden' : 'block'}`}>
         <Sidebar />
       </div>
 
       {/* Chat Interface */}
-      {window.innerHeight < 768 ? (
+      {isMobile ? (
         <div className={`${selectedUser && isChatOpen ? 'block' : 'hidden'}`}>
-          <ChatInterface />
+          <ChatInterface onClose={handleCloseChat} />
         </div>
       ) : (
         <div className="md:w-[70%] lg:w-[80%] h-screen hidden md:block ">
           {selectedUser ? (
             <div className="">
-              <ChatInterface />
+              <ChatInterface onClose={handleCloseChat} />
             </div>
           ) : (
             <div className="md:flex flex-col h-screen items-center justify-center bg-light">
