@@ -42,7 +42,7 @@ export default function Sidebar() {
     return (
         <div className="grid gap-y-4 py-6">
             {/* Headers */}
-            <div className="flex w-full items-center md:w-fit md:block justify-between px-6 gap-y-4">
+            <div className="flex w-full items-center md:w-fit md:block justify-between px-6 gap-y-4 md:space-y-4">
                 <div className="flex items-center gap-x-2.5">
                     <LucideUsersRound className="size-6 text-primary" />
                     <p className="font-medium text-base md:text-lg">Contacts</p>

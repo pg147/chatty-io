@@ -37,7 +37,7 @@ export default function Messages() {
                         <div className="size-fit bg-primary/10 rounded-full p-5 animate-bounce">
                             <LucideMessageCircle className="size-9 text-primary" />
                         </div>
-                        <h1 className="text-center text-lg">Type &quot;Hi&quot; to start a conversation with <span className="font-semibold">{`${selectedUser.name.slice(0, 1).toUpperCase()}${selectedUser.name.slice(1)}`}</span></h1>
+                        <h1 className="text-center font-regular text-lg">Type &quot;Hi&quot; to start a conversation with <span className="font-semibold">{`${selectedUser.name.slice(0, 1).toUpperCase()}${selectedUser.name.slice(1)}`}</span></h1>
                     </div>
                 ) : (
                     <div className="flex-1 flex flex-col p-3 md:p-9">
