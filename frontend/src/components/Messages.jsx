@@ -27,7 +27,7 @@ export default function Messages() {
 
     return (
         <div className="bg-light">
-            {true ? (
+            {isMessagesLoading ? (
                 <div className="flex flex-col h-screen">
                     <MessageSkeleton />
                 </div>
