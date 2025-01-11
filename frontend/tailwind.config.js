@@ -9,6 +9,11 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        regular: ['Aeonik-Regular'],
+        medium: ['Aeonik-Medium'],
+        bold: ['Aeonik-Bold']
+      },
       colors: {
         primary: "#1074F0",
         stroke: "#F4F4F4",
