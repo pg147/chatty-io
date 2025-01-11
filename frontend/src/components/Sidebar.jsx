@@ -10,14 +10,20 @@ import { LucideUsersRound } from "lucide-react";
 
 // Components
 import SidebarSkeleton from "./skeletons/SidebarSkeleton";
+import { useHelperStore } from "../store/useHelperStore";
 
 export default function Sidebar() {
     const { users, getUsers, selectedUser, setSelectedUser, isUsersLoading } = useChatStore();
     const { onlineUsers } = useAuthStore();
+    const { setChatOpen } = useHelperStore();
     const [showOnlineUsers, setShowOnlineUsers] = useState(false);
 
     const handleUserClick = (userId) => {
         setSelectedUser(userId);
+
+        if (window.innerWidth < 768) {
+            setChatOpen();
+        }
     }
 
     const handleOnlineUsers = () => {
@@ -51,7 +57,7 @@ export default function Sidebar() {
                         />
                         <p className="font-regular text-sm">Show online only</p>
                     </div>
-                    {showOnlineUsers && <p className="text-sm text-subtitle font-semibold">{`(${onlineUsers.length > 0 ? onlineUsers.length - 1 : 0})`}</p>} 
+                    {showOnlineUsers && <p className="text-sm text-subtitle font-semibold">{`(${onlineUsers.length > 0 ? onlineUsers.length - 1 : 0})`}</p>}
                 </div>
             </div>
 
