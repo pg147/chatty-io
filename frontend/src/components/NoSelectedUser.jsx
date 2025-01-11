@@ -10,8 +10,8 @@ export default function NoSelectedUser() {
       </div>
 
       <div className="w-fit mx-auto">
-        <h1 className="font-bold text-2xl text-center">Welcome to <span className="text-primary">Chatty!</span></h1>
-        <p className="text-center mt-2">Select a conversation from sidebar to start chatting</p>
+        <h1 className="font-semibold text-2xl text-center">Welcome to <span className="text-primary">Chatty!</span></h1>
+        <p className="text-center font-medium mt-2">Select a conversation from sidebar to start chatting</p>
       </div>
     </div>
   )

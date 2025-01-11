@@ -9,8 +9,10 @@ import { Toaster } from 'react-hot-toast';
 // Loader
 import { LoaderCircle } from 'lucide-react'
 
-// Components
+// Global States
 import { useAuthStore } from "./store/useAuthStore";
+
+// Components
 import Navbar from "./components/Navbar";
 
 // Pages
@@ -45,7 +47,7 @@ export default function App() {
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to={"login"} />} />
         </Routes>
-        <Toaster />
+        <Toaster containerClassName="font-medium" />
     </>
   );
 }
