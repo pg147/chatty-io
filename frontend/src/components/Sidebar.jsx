@@ -40,12 +40,12 @@ export default function Sidebar() {
     if (isUsersLoading) return <SidebarSkeleton />
 
     return (
-        <div className="grid gap-y-6 py-6">
+        <div className="grid gap-y-4 py-6">
             {/* Headers */}
-            <div className="px-6 space-y-4">
+            <div className="flex w-full items-center md:w-fit md:block justify-between px-6 gap-y-4">
                 <div className="flex items-center gap-x-2.5">
                     <LucideUsersRound className="size-6 text-primary" />
-                    <p className="font-medium text-lg">Contacts</p>
+                    <p className="font-medium text-base md:text-lg">Contacts</p>
                 </div>
                 <div className="flex items-center gap-x-1">
                     <div className="flex items-center gap-x-2.5">
@@ -59,6 +59,10 @@ export default function Sidebar() {
                     </div>
                     {showOnlineUsers && <p className="text-sm text-subtitle font-semibold">{`(${onlineUsers.length > 0 ? onlineUsers.length - 1 : 0})`}</p>}
                 </div>
+            </div>
+
+            <div className="w-full px-5">
+                <hr className="w-full" />
             </div>
 
             {/* User List */}
