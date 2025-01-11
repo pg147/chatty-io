@@ -32,11 +32,11 @@ export default function SignUpPage() {
     // Email Validations
     if (!formData.email) return toast.error("Email is required!");
     if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Invalid email format!");
-    
+
     // Password validations
     if (!formData.password) return toast.error("Password not entered !");
-    if(formData.password.length < 6) return toast.error("Password must be at least 6 characters")
-  
+    if (formData.password.length < 6) return toast.error("Password must be at least 6 characters")
+
     return true;
   }
 
@@ -73,9 +73,9 @@ export default function SignUpPage() {
 
           {/* Form */}
           <form onSubmit={handleSubmit}>
-            <div className="grid gap-y-6">
+            <div className="grid gap-y-4">
               {/* Input field - Full Name */}
-              <div className="grid gap-y-3">
+              <div className="grid gap-y-2">
                 <label className="font-medium">Full name</label>
                 <div className="relative">
                   {/* Prefix Icon */}
@@ -86,7 +86,7 @@ export default function SignUpPage() {
                     type="text"
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. John Doe"
-                    className="h-[55px] w-full lg:w-[500px] font-regular text-sm pl-11 border border-gray-300 rounded-xl outline-primary"
+                    className="h-[50px] md:h-[55px] w-full md:w-[500px] font-regular text-sm pl-11 border border-gray-300 rounded-xl outline-primary"
                   />
                 </div>
               </div>
@@ -103,7 +103,7 @@ export default function SignUpPage() {
                     type="email"
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="e.g. doejohn@gmail.com"
-                    className="h-[55px] w-full lg:w-[500px] font-regular text-sm pl-11 border border-gray-300 rounded-xl outline-primary"
+                    className="h-[50px] md:h-[55px] w-full md:w-[500px] font-regular text-sm pl-11 border border-gray-300 rounded-xl outline-primary"
                   />
                 </div>
               </div>
@@ -120,7 +120,7 @@ export default function SignUpPage() {
                     type={showPassword ? 'text' : 'password'}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                     placeholder="Your password"
-                    className="h-[55px] w-full lg:w-[500px] font-regular text-sm pl-11 border border-gray-300 rounded-xl outline-primary"
+                    className="h-[50px] md:h-[55px] w-full md:w-[500px] font-regular text-sm pl-11 border border-gray-300 rounded-xl outline-primary"
                   />
 
                   {/* Suffix Icon Button - Show/Hide password */}
@@ -129,9 +129,11 @@ export default function SignUpPage() {
                   </button>
                 </div>
               </div>
+            </div>
 
+            <div className="grid gap-y-7 mt-4">
               {/* Submit button */}
-              <button type="submit" disabled={isSigningUp} className="bg-primary font-medium lg:hover:bg-primary/90 transition-colors duration-300 ease-out text-white h-[55px] rounded-xl">
+              <button type="submit" disabled={isSigningUp} className="h-[50px] md:h-[55px] rounded-xl bg-primary font-medium lg:hover:bg-primary/90 transition-colors duration-300 ease-out text-white">
                 {isSigningUp ? (
                   <div className="w-fit mx-auto flex items-center justify-center gap-x-3">
                     <LoaderCircle className="size-5 animate-spin text-white" />

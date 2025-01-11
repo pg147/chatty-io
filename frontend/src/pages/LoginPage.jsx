@@ -51,9 +51,9 @@ export default function LoginPage() {
 
           {/* Form */}
           <form onSubmit={handleSubmit}>
-            <div className="grid gap-y-6">
+            <div className="grid gap-y-4">
               {/* Input field - Email */}
-              <div className="grid gap-y-3">
+              <div className="grid gap-y-2">
                 <label className="font-medium">Email</label>
                 <div className="relative">
                   {/* Prefix Icon */}
@@ -64,13 +64,13 @@ export default function LoginPage() {
                     type="email"
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="e.g. doejohn@gmail.com"
-                    className="h-[55px] w-full lg:w-[500px] font-regular text-sm pl-11 border border-gray-300 rounded-xl outline-primary"
+                    className="h-[50px] md:h-[55px] w-full md:w-[500px] font-regular text-sm pl-11 border border-gray-300 rounded-xl outline-primary"
                   />
                 </div>
               </div>
 
               {/* Input field - Password */}
-              <div className="grid gap-y-3">
+              <div className="grid gap-y-2">
                 <label className="font-medium">Password</label>
                 <div className="relative">
                   {/* Prefix Icon */}
@@ -81,7 +81,7 @@ export default function LoginPage() {
                     type={showPassword ? 'text' : 'password'}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                     placeholder="Your password"
-                    className="h-[55px] w-full lg:w-[500px] font-regular text-sm pl-11 border border-gray-300 rounded-xl outline-primary"
+                    className="h-[50px] md:h-[55px] w-full md:w-[500px] font-regular text-sm pl-11 border border-gray-300 rounded-xl outline-primary"
                   />
 
                   {/* Suffix Icon Button - Show/Hide password */}
@@ -90,9 +90,12 @@ export default function LoginPage() {
                   </button>
                 </div>
               </div>
+            </div>
 
+            {/* Form Controls */}
+            <div className="grid gap-y-7 mt-4">
               {/* Submit button */}
-              <button type="submit" disabled={isLoggingIn} className="bg-primary font-medium lg:hover:bg-primary/90 transition-colors duration-300 ease-out text-white h-[55px] rounded-xl">
+              <button type="submit" disabled={isLoggingIn} className="h-[50px] md:h-[55px] rounded-xl bg-primary font-medium lg:hover:bg-primary/90 transition-colors duration-300 ease-out text-white">
                 {isLoggingIn ? (
                   <div className="w-fit mx-auto flex items-center justify-center gap-x-3">
                     <LoaderCircle className="size-5 animate-spin text-white" />
