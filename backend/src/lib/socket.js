@@ -1,9 +1,9 @@
 import { Server } from 'socket.io';
-import http from 'http';
+import https from 'https';
 import express from 'express';
 
 const app = express(); // initialized express app
-const server = http.createServer(app);  // created a HTTP Server for app
+const server = https.createServer(app);  // created a HTTP Server for app
 
 // Initialized new Socket Server
 const io = new Server(server, {
