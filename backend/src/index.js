@@ -25,9 +25,22 @@ app.use(express.json());
 // Cookie Parser
 app.use(cookieParser());
 
+const allowedOrigins = [
+    'http://localhost:4173', // For development
+    'https://chattyio.site',  // Production
+    'https://www.chattyio.site'
+];
+
 // CORS 
 app.use(cors({
-    origin: process.env.NODE_ENV === 'development' ? 'http://localhost:4173' : process.env.ALLOWED_ORIGIN,
+    origin: function (origin, callback) {  // function for dynamic origin checking
+        if (!origin || allowedOrigins.includes(origin)) { // Allow requests with no origin (e.g. Postman) and from allowed origins
+            callback(null, true);
+        } else {
+            console.error("CORS Error: Origin not allowed:", origin); // Log the bad origin for debugging
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 }))
 
