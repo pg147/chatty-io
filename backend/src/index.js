@@ -27,7 +27,7 @@ app.use(cookieParser());
 
 // CORS 
 app.use(cors({
-    origin: ['http://localhost:4173', 'https://195.35.6.142:4173', 'https://chattyio.site' ,'https://www.chattyio.site'],
+    origin: process.env.NODE_ENV === 'development' ? 'http://localhost:4173' : process.env.ALLOWED_ORIGIN,
     credentials: true
 }))
 
