@@ -8,7 +8,13 @@ const server = http.createServer(app);  // created a HTTP Server for app
 // Initialized new Socket Server
 const io = new Server(server, {
     cors: {
-        origin: ['http://localhost:5173']
+        origin: [
+            "https://chattyio.site",
+            "https://www.chattyio.site",
+            "http://localhost:4173", 
+        ],
+        methods: ["GET", "POST"], 
+        credentials: true
     }
 });
 
@@ -21,7 +27,7 @@ export function getUserSocketId(userId) {
 
 io.on("connection", (socket) => {
     console.log("An user is connected : ", socket.id);
-    
+
     const userId = socket.handshake.query.userId; // extracting userId from Client Query
     if (userId) userSocketMap[userId] = socket.id; // updating in userSocketMap
 
